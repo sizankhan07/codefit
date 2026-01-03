@@ -1,0 +1,7 @@
+com\fitness\model\User.class
+com\fitness\controller\AuthController.class
+com\fitness\model\FitnessPlan.class
+com\fitness\controller\FitnessController.class
+com\fitness\FitnessApplication.class
+com\fitness\repository\UserRepository.class
+com\fitness\service\FitnessService.class

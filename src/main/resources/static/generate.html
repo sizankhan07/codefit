@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Plan - AI Fitness</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">AI Fitness</div>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="generate.html" class="active">Generate Plan</a>
+            <a href="profile.html">Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="plan-section">
+            <h1>🤖 AI-Powered Fitness Plan</h1>
+            <button id="generateBtn" class="btn btn-primary btn-large" onclick="generatePlan()">
+                Generate My Plan
+            </button>
+            
+            <div id="loading" class="loading" style="display: none;">
+                <p>AI is analyzing your profile and generating personalized plan...</p>
+            </div>
+            
+            <div id="planResult" style="display: none;">
+                <div class="plan-card">
+                    <h2>📊 Your Health Metrics</h2>
+                    <p><strong>BMI:</strong> <span id="bmiValue"></span></p>
+                    <p><strong>Category:</strong> <span id="bmiCategory"></span></p>
+                </div>
+                
+                <div class="plan-card">
+                    <h2>💪 Workout Plan</h2>
+                    <pre id="workoutPlan"></pre>
+                </div>
+                
+                <div class="plan-card">
+                    <h2>🥗 Diet Plan</h2>
+                    <pre id="dietPlan"></pre>
+                </div>
+                
+                <div class="plan-card">
+                    <h2>✨ AI Recommendations</h2>
+                    <pre id="recommendations"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        checkAuth();
+        
+        async function generatePlan() {
+            const userId = localStorage.getItem('userId');
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('planResult');
+            const btn = document.getElementById('generateBtn');
+            
+            btn.disabled = true;
+            loading.style.display = 'block';
+            result.style.display = 'none';
+            
+            try {
+                const response = await fetch(`/api/fitness/generate/${userId}`, {
+                    method: 'POST'
+                });
+                
+                const plan = await response.json();
+                
+                document.getElementById('bmiValue').textContent = plan.bmi.toFixed(1);
+                document.getElementById('bmiCategory').textContent = plan.bmiCategory;
+                document.getElementById('workoutPlan').textContent = plan.workoutPlan;
+                document.getElementById('dietPlan').textContent = plan.dietPlan;
+                document.getElementById('recommendations').textContent = plan.recommendations;
+                
+                loading.style.display = 'none';
+                result.style.display = 'block';
+            } catch (error) {
+                alert('Failed to generate plan. Please try again.');
+                console.error(error);
+            } finally {
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

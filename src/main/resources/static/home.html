@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - AI Fitness</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">AI Fitness</div>
+        <div class="nav-links">
+            <a href="home.html" class="active">Home</a>
+            <a href="generate.html">Generate Plan</a>
+            <a href="profile.html">Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="dashboard">
+            <h1>Welcome, <span id="username"></span>! 👋</h1>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Height</h3>
+                    <p id="height">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Weight</h3>
+                    <p id="weight">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>BMI</h3>
+                    <p id="bmi">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Goal</h3>
+                    <p id="goal">-</p>
+                </div>
+            </div>
+            
+            <div class="action-section">
+                <h2>Ready to transform?</h2>
+                <p>Generate your personalized AI-powered fitness and nutrition plan</p>
+                <a href="generate.html" class="btn btn-primary btn-large">Generate My Plan</a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        checkAuth();
+        loadUserData();
+        
+        async function loadUserData() {
+            const userId = localStorage.getItem('userId');
+            const username = localStorage.getItem('username');
+            
+            document.getElementById('username').textContent = username;
+            
+            try {
+                const response = await fetch(`/api/fitness/user/${userId}`);
+                const user = await response.json();
+                
+                document.getElementById('height').textContent = user.height + ' cm';
+                document.getElementById('weight').textContent = user.weight + ' kg';
+                document.getElementById('goal').textContent = user.goal;
+                
+                const bmi = (user.weight / ((user.height / 100) ** 2)).toFixed(1);
+                document.getElementById('bmi').textContent = bmi;
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+    </script>
+</body>
+</html>
