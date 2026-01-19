@@ -3,11 +3,17 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth; 
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #000033;
+    background-image: 
+        linear-gradient(rgba(0,255,255,0.2)1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,255,255,0.2)1px,transparent 1px);
+
+    background-size: 20px 20px;
     min-height: 100vh;
     color: #333;
 }
@@ -16,10 +22,30 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    justify-content: space-around;
+    
+}
+.stat-item {
+    text-align: center;
+    padding: 0px 10px;
+
+}
+
+.number{
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #00ffff;
+    margin-bottom: 5px;
+}
+
+.label{
+    font-size:0.8em;
+    text-transform:uppercase;
+    color:#efeaea;
 }
 
 .navbar {
-    background: rgba(255, 255, 255, 0.95);
+    background:  #000033;
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -30,7 +56,7 @@ body {
 .nav-brand {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #667eea;
+    color: white;
 }
 
 .nav-links {
@@ -51,19 +77,34 @@ body {
 }
 
 .welcome-section {
-    text-align: center;
-    padding: 100px 20px;
-    color: white;
+    display: flex; 
+    align-items: center; 
+    gap: 20px;
+    
+     
+}
+.image-left {
+    width: 200px; 
+    height: auto;
 }
 
+.text-right {
+    
+    flex: 1; 
+}
 .welcome-section h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 5rem;
+    margin-bottom: -1rem;
+   
+    
 }
 
-.welcome-section p {
-    font-size: 1.2rem;
+
+.sline p {
+    font-size: 2rem;
     margin-bottom: 2rem;
+    padding-bottom:  10px 160px;
+    color: #ccc;
 }
 
 .button-group {
@@ -95,7 +136,7 @@ body {
 }
 
 .btn-secondary {
-    background: transparent;
+    background: white;
     color: white;
     border: 2px solid white;
 }
@@ -144,7 +185,7 @@ body {
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #e9ebe6;
 }
 
 .form-footer {
@@ -160,7 +201,7 @@ body {
 }
 
 .dashboard {
-    background: white;
+    background: #0d1a26;
     padding: 40px;
     border-radius: 12px;
     margin-top: 30px;
@@ -182,7 +223,7 @@ body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 30px;
     border-radius: 12px;
-    color: white;
+    color: rgb(11, 11, 11);
     text-align: center;
 }
 
@@ -200,7 +241,7 @@ body {
 .action-section {
     text-align: center;
     padding: 40px;
-    background: #f8f9fa;
+    background: #000033;
     border-radius: 12px;
 }
 
@@ -215,7 +256,7 @@ body {
 }
 
 .plan-section {
-    background: white;
+    background: #000033;
     padding: 40px;
     border-radius: 12px;
     margin-top: 30px;
@@ -257,18 +298,29 @@ body {
     padding: 10px;
     border-radius: 8px;
     text-align: center;
+    display: none;
+}
+
+#setupMessage {
+    margin-top: 1rem;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    display: none;
 }
 
 .success {
     background: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
+    display: block;
 }
 
 .error {
     background: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
+    display: block;
 }
 
 @media (max-width: 768px) {
