@@ -96,7 +96,7 @@ public class FitnessService {
     private String generateRecommendations(User user, double bmi) {
         StringBuilder rec = new StringBuilder();
         
-        rec.append("AI-Powered Recommendations:\n\n");
+        rec.append("App Recommendations:\n\n");
         rec.append("- Drink 3-4 liters of water daily\n");
         rec.append("- Get 7-9 hours of quality sleep\n");
         rec.append("- Track your progress weekly\n");
